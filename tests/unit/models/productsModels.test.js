@@ -8,8 +8,8 @@ const { productsModels } = require('./../../../src/models');
 describe('Products Model Layer Unit Testing', function () {
   afterEach(sinon.restore);
 
-  describe('testing the /products endpoint', function () {
-    it('should return a list of passengers', async function () {
+  describe('testing the products query in database', function () {
+    it('should return a list of products', async function () {
       sinon.stub(connection, 'execute').resolves([allProductsResponse]);
 
       const { type, message } = await productsModels.listAll();
@@ -26,8 +26,8 @@ describe('Products Model Layer Unit Testing', function () {
     });
   });
 
-  describe('testing the /products/:productId endpoint', function () {
-    it('should return a passenger', async function () {
+  describe('testing the single product query', function () {
+    it('should return a product', async function () {
       sinon.stub(connection, 'execute').resolves([[allProductsResponse[0]]]);
 
       const { type, message } = await productsModels.findById(1);

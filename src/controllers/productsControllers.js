@@ -9,10 +9,10 @@ const listAllProducts = async (_req, res) => {
   res.status(200).json(message);
 };
 
-const getOneProduct = async (req, res, next) => {
+const getOneProduct = async (req, res) => {
   const { productId } = req.params;
   const { type, message } = await productsServices.findById(productId);
-  if (type) return next(createCustomError(message, mapError(type)));
+  if (type) throw createCustomError(message, mapError(type));
   res.status(200).json(message);
 };
 
