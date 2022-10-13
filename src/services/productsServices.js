@@ -1,6 +1,7 @@
 const { databaseError } = require('../../tests/unit/utils/modulesResponses');
 const { productsModels } = require('../models');
 const { resultTypes, resultMsg } = require('../utils/errorResults');
+const { validateNewProduct } = require('./validations/validationInputValues');
 
 const listAll = async () => {
   const { type, message } = await productsModels.listAll();
@@ -16,6 +17,8 @@ const findById = async (productId) => {
 };
 
 const insertProduct = async (name) => {
+  const error = validateNewProduct(name);
+  if (error.type) return error;
   const { type: msgType, message: newProductId } = await productsModels.insert(name);
   if (msgType === resultTypes.databaseError) return databaseError;
   const { type, message } = await productsModels.findById(newProductId);
