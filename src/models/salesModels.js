@@ -7,7 +7,6 @@ const insert = asyncWrapper(async (saleList) => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.sales (date) VALUES (NOW())',
   );
-  console.log(insertId);
   await Promise.all(saleList.map(async (sale) => {
     const saleObjWithId = { saleId: insertId, ...sale };
     const [columns, placeholders] = convertToSnakeCase(saleObjWithId);

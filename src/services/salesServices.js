@@ -1,8 +1,11 @@
 const { databaseError } = require('../../tests/unit/utils/modulesResponses');
 const { salesModels } = require('../models');
 const { resultTypes } = require('../utils/errorResults');
+const { validateNewSales } = require('./validations/validationInputValues');
 
 const resgisterSales = async (salesList) => {
+  const error = await validateNewSales(salesList);
+  if (error.type) return error;
   const { type: msgType, message: newSalesId } = await salesModels.insert(salesList);
   if (msgType === resultTypes.databaseError) return databaseError;
   const { type, message } = await salesModels.findById(newSalesId);
