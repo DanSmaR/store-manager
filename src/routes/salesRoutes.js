@@ -6,9 +6,10 @@ const { salesController } = require('../controllers');
 const router = express.Router();
 
 router.route('/')
+  .get()
   .post(validateNewSales, salesController.registerSales);
 
-// router.route('/:saleId')
-//   .get(salesController.getSale);
+router.route('/:saleId')
+  .get(salesController.getSale);
 
 module.exports = router;

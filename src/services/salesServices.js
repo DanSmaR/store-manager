@@ -18,12 +18,14 @@ const resgisterSales = async (salesList) => {
   return { type: null, message: response };
 };
 
-// const getSale = async (saleId) => {
-//   const { type, message } = await salesModels.findById(saleId);
-//   if (type === resultTypes.databaseError) return databaseError;
-// };
+const getSale = async (saleId) => {
+  const { type, message } = await salesModels.findByIdJoinDate(saleId);
+  if (type === resultTypes.databaseError) return databaseError;
+  if (type === resultTypes.saleNotFound) return { type, message };
+  return { type: null, message };
+};
 
 module.exports = {
   resgisterSales,
-  // getSale,
+  getSale,
 };
