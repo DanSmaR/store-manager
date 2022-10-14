@@ -17,7 +17,14 @@ const getSale = async (req, res) => {
   res.status(200).json(message);
 };
 
+const getAllSales = async (_req, res) => {
+  const { type, message } = await salesServices.getAllSales();
+  if (type) throw createCustomError(message, mapError(type));
+  res.status(200).json(message);
+};
+
 module.exports = {
   registerSales,
   getSale,
+  getAllSales,
 };

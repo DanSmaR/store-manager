@@ -24,7 +24,6 @@ const findById = asyncWrapper(async (saleId) => {
   const [sales] = await connection.execute(
     'SELECT * FROM StoreManager.sales_products WHERE sale_id = ?', [saleId],
     );
-    console.log(sales);
   if (sales.length) return { type: null, message: sales };
   return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
 });
@@ -35,10 +34,22 @@ const findByIdJoinDate = asyncWrapper(async (saleId) => {
     FROM StoreManager.sales_products AS sp
     JOIN StoreManager.sales AS sa
     ON sp.sale_id = sa.id
-    WHERE sp.sale_id = ?`,
+    WHERE sp.sale_id = ?
+    ORDER BY sp.sale_id, sp.product_id`,
     [saleId],
   );
-  console.log(sales);
+  if (sales.length) return { type: null, message: camelize(sales) };
+  return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
+});
+
+const findAllSales = asyncWrapper(async () => {
+  const [sales] = await connection.execute(
+    `SELECT sp.sale_id, sa.date, sp.product_id, sp.quantity
+    FROM StoreManager.sales_products AS sp
+    JOIN StoreManager.sales AS sa
+    ON sp.sale_id = sa.id
+    ORDER BY sp.sale_id, sp.product_id`,
+  );
   if (sales.length) return { type: null, message: camelize(sales) };
   return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
 });
@@ -47,4 +58,5 @@ module.exports = {
   insert,
   findById,
   findByIdJoinDate,
+  findAllSales,
 };

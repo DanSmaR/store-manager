@@ -25,7 +25,15 @@ const getSale = async (saleId) => {
   return { type: null, message };
 };
 
+const getAllSales = async () => {
+  const { type, message } = await salesModels.findAllSales();
+  if (type === resultTypes.databaseError) return databaseError;
+  if (type === resultTypes.saleNotFound) return { type, message };
+  return { type: null, message };
+};
+
 module.exports = {
   resgisterSales,
   getSale,
+  getAllSales,
 };
