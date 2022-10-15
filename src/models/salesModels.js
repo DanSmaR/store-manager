@@ -2,7 +2,10 @@ const camelize = require('camelize');
 
 const asyncWrapper = require('../utils/asyncWrapper');
 const { resultTypes, resultMsg } = require('../utils/errorResults');
-const convertToSnakeCase = require('../utils/nameConverter');
+const {
+  convertToInsertPreparedStatements,
+  convertToUpdatePreparedStatements,
+} = require('../utils/preparedStatementConverter');
 const connection = require('./db/connection');
 
 const insert = asyncWrapper(async (saleList) => {
@@ -11,7 +14,7 @@ const insert = asyncWrapper(async (saleList) => {
   );
   await Promise.all(saleList.map(async (sale) => {
     const saleObjWithId = { saleId: insertId, ...sale };
-    const [columns, placeholders] = convertToSnakeCase(saleObjWithId);
+    const [columns, placeholders] = convertToInsertPreparedStatements(saleObjWithId);
     await connection.execute(
       `INSERT INTO StoreManager.sales_products (${columns}) VALUES (${placeholders})`,
       [...Object.values(saleObjWithId)],
@@ -62,10 +65,25 @@ const remove = asyncWrapper(async (id) => {
   return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
 });
 
+const update = asyncWrapper(async (id, saleList) => {
+  const result = await Promise.all(saleList.map(async (sale) => {
+    const [{ affectedRows }] = await connection.execute(
+      'UPDATE StoreManager.sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
+      [sale.quantity, id, sale.productId],
+    );
+    return affectedRows;
+  }));
+  if (result.includes(0)) {
+    return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
+  }
+  return { type: null, message: result };
+});
+
 module.exports = {
   insert,
   findById,
   findByIdJoinDate,
   findAllSales,
   remove,
+  update,
 };

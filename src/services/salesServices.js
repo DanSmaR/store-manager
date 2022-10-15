@@ -18,6 +18,22 @@ const resgisterSales = async (salesList) => {
   return { type: null, message: response };
 };
 
+const updateSale = async (saleId, saleList) => {
+  const error = await validateNewSales(saleList);
+  if (error.type) return error;
+  const { type: msgType, message } = await salesModels.update(saleId, saleList);
+  if (msgType === resultTypes.databaseError) return databaseError;
+  if (msgType === resultTypes.saleNotFound) return { type: msgType, message };
+  const { type, message: updatedSale } = await salesModels.findById(saleId);
+  if (type === resultTypes.databaseError) return databaseError;
+  const response = {
+    saleId,
+    itemsUpdated: updatedSale
+      .map((item) => ({ productId: item.product_id, quantity: item.quantity })),
+  };
+  return { type: null, message: response };
+};
+
 const getSale = async (saleId) => {
   const { type, message } = await salesModels.findByIdJoinDate(saleId);
   if (type === resultTypes.databaseError) return databaseError;
@@ -44,4 +60,5 @@ module.exports = {
   getSale,
   getAllSales,
   removeSale,
+  updateSale,
 };
