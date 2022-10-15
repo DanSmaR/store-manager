@@ -1,6 +1,7 @@
 const { resultTypes } = require('./errorResults');
 
 function errorDatabase(error) {
+  console.error({ message: error.message });
   console.error({ stack: error.stack });
   return { type: resultTypes.databaseError, message: error.message };
 }

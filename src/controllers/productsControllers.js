@@ -10,8 +10,14 @@ const listAllProducts = async (_req, res) => {
 };
 
 const getOneProduct = async (req, res) => {
+  const { message: product } = req.result;
+  res.status(200).json(product);
+};
+
+const updateProduct = async (req, res) => {
   const { productId } = req.params;
-  const { type, message } = await productsServices.findById(productId);
+  const { name } = req.body;
+  const { type, message } = await productsServices.updateProduct(productId, name);
   if (type) throw createCustomError(message, mapError(type));
   res.status(200).json(message);
 };
@@ -27,4 +33,5 @@ module.exports = {
   listAllProducts,
   getOneProduct,
   registerProduct,
+  updateProduct,
 };
