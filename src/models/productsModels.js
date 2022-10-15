@@ -28,7 +28,6 @@ const update = asyncWrapper(async (id, name) => {
   const [{ affectedRows }] = await connection.execute(
     'UPDATE StoreManager.products SET name = ? WHERE id = ?', [name, id],
   );
-  console.log(affectedRows);
   if (affectedRows > 0) return { type: null, message: affectedRows };
   return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
 });

@@ -9,7 +9,7 @@ const listAllProducts = async (_req, res) => {
   res.status(200).json(message);
 };
 
-const getOneProduct = async (req, res) => {
+const getOneProduct = (req, res) => {
   const { message: product } = req.result;
   res.status(200).json(product);
 };

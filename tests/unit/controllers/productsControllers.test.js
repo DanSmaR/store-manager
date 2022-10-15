@@ -52,7 +52,7 @@ describe('Products Controllers Layer Unit Testing', function () {
   describe('Testing the /products/:productId endpoint', function () {
     it('should return one product at get method', async function () {
       const res = {};
-      const req = { params: { productId: 1 }};
+      const req = { params: { productId: 1 }, result: { type: null, message: allProductsResponse[0]}};
 
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
