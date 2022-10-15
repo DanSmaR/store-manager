@@ -54,9 +54,18 @@ const findAllSales = asyncWrapper(async () => {
   return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
 });
 
+const remove = asyncWrapper(async (id) => {
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM StoreManager.sales WHERE id = ?', [id],
+  );
+  if (affectedRows > 0) return { type: null, message: affectedRows };
+  return { type: resultTypes.saleNotFound, message: resultMsg.saleNotFound };
+});
+
 module.exports = {
   insert,
   findById,
   findByIdJoinDate,
   findAllSales,
+  remove,
 };

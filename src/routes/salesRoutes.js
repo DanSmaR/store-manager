@@ -10,6 +10,7 @@ router.route('/')
   .post(validateNewSales, salesController.registerSales);
 
 router.route('/:saleId')
-  .get(salesController.getSale);
+  .get(salesController.getSale)
+  .delete(salesController.deleteSales);
 
 module.exports = router;

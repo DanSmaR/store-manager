@@ -32,8 +32,16 @@ const getAllSales = async () => {
   return { type: null, message };
 };
 
+const removeSale = async (saleId) => {
+  const { type: msgType, message } = await salesModels.remove(saleId);
+  if (msgType === resultTypes.databaseError) return databaseError;
+  if (msgType === resultTypes.saleNotFound) return { type: msgType, message };
+  return { type: null, message };
+};
+
 module.exports = {
   resgisterSales,
   getSale,
   getAllSales,
+  removeSale,
 };
