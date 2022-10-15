@@ -10,6 +10,7 @@ router.route('/')
 
 router.route('/:productId')
   .get(checkHasProduct, productsController.getOneProduct)
-  .put(validateNewProduct, productsController.updateProduct);
+  .put(validateNewProduct, productsController.updateProduct)
+  .delete(productsController.deleteProduct);
 
 module.exports = router;

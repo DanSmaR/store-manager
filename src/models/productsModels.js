@@ -32,9 +32,18 @@ const update = asyncWrapper(async (id, name) => {
   return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
 });
 
+const remove = asyncWrapper(async (id) => {
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?', [id],
+  );
+  if (affectedRows > 0) return { type: null, message: affectedRows };
+  return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
+});
+
 module.exports = {
   listAll,
   findById,
   insert,
   update,
+  remove,
 };

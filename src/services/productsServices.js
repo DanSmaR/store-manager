@@ -37,9 +37,17 @@ const updateProduct = async (productId, name) => {
   return { type: null, message: updatedProduct };
 };
 
+const removeProduct = async (productId) => {
+  const { type: msgType, message } = await productsModels.remove(productId);
+  if (msgType === resultTypes.databaseError) return databaseError;
+  if (msgType === resultTypes.productNotFound) return { type: msgType, message };
+  return { type: null, message };
+};
+
 module.exports = {
   listAll,
   findById,
   insertProduct,
   updateProduct,
+  removeProduct,
 };
