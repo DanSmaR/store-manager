@@ -48,7 +48,8 @@ const searchProduct = async (query) => {
   const { type, message } = await productsModels.listAll();
   if (type) return databaseError;
   if (!query) return { type, message };
-  const queriedProduct = message.filter(({ name }) => name.includes(query));
+  const queriedProduct = message
+    .filter(({ name }) => name.toLowerCase().includes(query.toLowerCase()));
   return { type, message: queriedProduct };
 };
 
