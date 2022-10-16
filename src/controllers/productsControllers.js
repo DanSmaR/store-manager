@@ -36,10 +36,19 @@ const registerProduct = async (req, res) => {
   res.status(201).json(message);
 };
 
+const searchProduct = async (req, res) => {
+  const { q: query } = req.query;
+  const { type, message } = await productsServices.searchProduct(query);
+  console.log({ product: message });
+  if (type) throw createCustomError(message, mapError(type));
+  res.status(200).json(message);
+};
+
 module.exports = {
   listAllProducts,
   getOneProduct,
   registerProduct,
   updateProduct,
   deleteProduct,
+  searchProduct,
 };

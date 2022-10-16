@@ -44,10 +44,19 @@ const removeProduct = async (productId) => {
   return { type: null, message };
 };
 
+const searchProduct = async (query) => {
+  const { type, message } = await productsModels.listAll();
+  if (type) return databaseError;
+  if (!query) return { type, message };
+  const queriedProduct = message.filter(({ name }) => name.includes(query));
+  return { type, message: queriedProduct };
+};
+
 module.exports = {
   listAll,
   findById,
   insertProduct,
   updateProduct,
   removeProduct,
+  searchProduct,
 };

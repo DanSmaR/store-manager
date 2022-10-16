@@ -4,6 +4,8 @@ const { productsController } = require('../controllers');
 
 const router = express.Router();
 
+router.get('/search', productsController.searchProduct);
+
 router.route('/')
   .get(productsController.listAllProducts)
   .post(validateNewProduct, productsController.registerProduct);

@@ -4,7 +4,6 @@ const asyncWrapper = require('../utils/asyncWrapper');
 const { resultTypes, resultMsg } = require('../utils/errorResults');
 const {
   convertToInsertPreparedStatements,
-  convertToUpdatePreparedStatements,
 } = require('../utils/preparedStatementConverter');
 const connection = require('./db/connection');
 

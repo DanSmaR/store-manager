@@ -9,14 +9,6 @@ function convertToInsertPreparedStatements(dataObj) {
   return [columns, placeholders];
 }
 
-function convertToUpdatePreparedStatements(dataObj) {
-  const columns = Object.keys(snakeize(dataObj))
-    .map((key) => `${key} = ?`)
-    .join(', ');
-  return columns;
-}
-
 module.exports = {
   convertToInsertPreparedStatements,
-  convertToUpdatePreparedStatements,
 };
