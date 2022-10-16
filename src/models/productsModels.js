@@ -40,10 +40,18 @@ const remove = asyncWrapper(async (id) => {
   return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
 });
 
+const search = asyncWrapper(async (query) => {
+  const [product] = await connection.execute(
+    'SELECT * FROM StoreManager.products WHERE name LIKE ?', [`%${query}%`],
+  );
+  return { type: null, message: product };
+});
+
 module.exports = {
   listAll,
   findById,
   insert,
   update,
   remove,
+  search,
 };

@@ -45,12 +45,9 @@ const removeProduct = async (productId) => {
 };
 
 const searchProduct = async (query) => {
-  const { type, message } = await productsModels.listAll();
+  const { type, message } = await productsModels.search(query);
   if (type) return databaseError;
-  if (!query) return { type, message };
-  const queriedProduct = message
-    .filter(({ name }) => name.toLowerCase().includes(query.toLowerCase()));
-  return { type, message: queriedProduct };
+  return { type, message };
 };
 
 module.exports = {
