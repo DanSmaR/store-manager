@@ -1,4 +1,5 @@
 const resultTypes = {
+  missingFields: 'MISSING_FIELDS',
   invalidValue: 'INVALID_VALUE',
   productNotFound: 'PRODUCT_NOT_FOUND',
   saleNotFound: 'SALE_NOT_FOUND',
@@ -10,6 +11,7 @@ const resultMsg = {
   productNotFound: 'Product not found',
   saleNotFound: 'Sale not found',
   databaseError: 'Database error',
+  nameRequired: '"name" is required',
 };
 
 module.exports = {

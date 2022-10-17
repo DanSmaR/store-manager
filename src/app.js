@@ -2,7 +2,7 @@ const express = require('express');
 require('express-async-errors');
 
 const productsRoutes = require('./routes/productsRoutes');
-// const salesRoutes = require('./routes/salesRoutes');
+const salesRoutes = require('./routes/salesRoutes');
 const { errorHandlerMiddleware } = require('./middlewares');
 
 const app = express();
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/products', productsRoutes);
-// app.use('/sales', salesRoutes);
+app.use('/sales', salesRoutes);
 app.use(errorHandlerMiddleware);
 
 // não remova esse endpoint, é para o avaliador funcionar

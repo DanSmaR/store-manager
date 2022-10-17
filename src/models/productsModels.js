@@ -4,14 +4,14 @@ const connection = require('./db/connection');
 
 const listAll = asyncWrapper(async () => {
   const [products] = await connection.execute(
-    'SELECT * FROM products',
+    'SELECT * FROM StoreManager.products',
   );
   return { type: null, message: products };
 });
 
 const findById = asyncWrapper(async (productId) => {
   const [[product]] = await connection.execute(
-    'SELECT * FROM products WHERE id = ?', [productId],
+    'SELECT * FROM StoreManager.products WHERE id = ?', [productId],
   );
   if (product) return { type: null, message: product };
   return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
@@ -19,7 +19,7 @@ const findById = asyncWrapper(async (productId) => {
 
 const insert = asyncWrapper(async (name) => {
   const [{ insertId }] = await connection.execute(
-    'INSERT INTO products (name) VALUE (?)', [name],
+    'INSERT INTO StoreManager.products (name) VALUES (?)', [name],
   );
   return { type: null, message: insertId };
 });
