@@ -1,6 +1,6 @@
 const { databaseError } = require('../../tests/unit/utils/modulesResponses');
 const { productsModels } = require('../models');
-const { resultTypes, resultMsg } = require('../utils/errorResults');
+const { resultTypes } = require('../utils/errorResults');
 
 const listAll = async () => {
   const { type, message } = await productsModels.listAll();
