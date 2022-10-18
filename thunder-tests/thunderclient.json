@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "01d94f12-0f30-42bf-a3cd-2e7820df05e9",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "get all products",
+    "url": "{{local}}/products",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-10-18T15:49:27.585Z",
+    "modified": "2022-10-18T15:49:27.585Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b36a9094-e59d-49d1-ba79-68b0fb53dca4",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "get one product",
+    "url": "{{local}}/products/",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-10-18T15:49:27.586Z",
+    "modified": "2022-10-18T15:55:12.547Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "3ec40105-ff41-460e-bdd9-7526a7052ab0",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "insert product",
+    "url": "{{local}}/products",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-10-18T15:49:27.587Z",
+    "modified": "2022-10-18T15:49:27.587Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Tenis Adidas Pro\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "690b92e6-6285-4423-8877-4d1eb1bbf9e9",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "salesRegister",
+    "url": "{{local}}/sales",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-10-18T15:49:27.588Z",
+    "modified": "2022-10-18T15:51:57.081Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n    {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "a554d021-6ebc-4555-bd31-36cfd095ed49",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "getSale",
+    "url": "{{local}}/sales/13",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2022-10-18T15:49:27.589Z",
+    "modified": "2022-10-18T15:49:27.589Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "50000583-8ebd-4bd0-80b4-8646d2e31403",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "get all sales",
+    "url": "{{local}}/sales",
+    "method": "GET",
+    "sortNum": 60000,
+    "created": "2022-10-18T15:49:27.590Z",
+    "modified": "2022-10-18T15:49:27.590Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "fe3e8387-58f6-4071-a4f6-d6f8ea4cff19",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "update product",
+    "url": "{{local}}/products/1",
+    "method": "PUT",
+    "sortNum": 70000,
+    "created": "2022-10-18T15:49:27.591Z",
+    "modified": "2022-10-18T15:49:27.591Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Martelo do Danilo\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c787d304-4e08-4ee3-97c0-91be457a9ec7",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "delete product",
+    "url": "{{local}}/products/22",
+    "method": "DELETE",
+    "sortNum": 80000,
+    "created": "2022-10-18T15:49:27.592Z",
+    "modified": "2022-10-18T15:49:27.592Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "e080ca9a-e712-459b-bc6b-edfa4d344992",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "delete sales",
+    "url": "{{local}}/sales/1",
+    "method": "DELETE",
+    "sortNum": 90000,
+    "created": "2022-10-18T15:49:27.593Z",
+    "modified": "2022-10-18T15:49:27.593Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "94a6ba33-11c8-4f01-a043-ca9131981140",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "update sales",
+    "url": "{{local}}/sales/1",
+    "method": "PUT",
+    "sortNum": 100000,
+    "created": "2022-10-18T15:49:27.594Z",
+    "modified": "2022-10-18T15:49:27.594Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 111,\n    \"quantity\": 10\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 60\n  }\n]",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "da294f1e-80d9-45fc-9ef8-f9fa76c781b5",
+    "colId": "42c0fce9-1383-4a0b-aff7-b724b9bc2e1f",
+    "containerId": "",
+    "name": "search product",
+    "url": "{{local}}/products/search?q=mar",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2022-10-18T15:49:27.595Z",
+    "modified": "2022-10-18T15:49:27.595Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "mar",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  }
+]
