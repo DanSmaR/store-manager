@@ -26,8 +26,35 @@ const insertProduct = async (name) => {
   return { type: null, message };
 };
 
+const updateProduct = async (productId, name) => {
+  const error = validateNewProduct(name);
+  if (error.type) return error;
+  const { type: msgType, message } = await productsModels.update(productId, name);
+  if (msgType === resultTypes.databaseError) return databaseError;
+  if (msgType === resultTypes.productNotFound) return { type: msgType, message };
+  const { type, message: updatedProduct } = await productsModels.findById(productId);
+  if (type === resultTypes.databaseError) return databaseError;
+  return { type: null, message: updatedProduct };
+};
+
+const removeProduct = async (productId) => {
+  const { type: msgType, message } = await productsModels.remove(productId);
+  if (msgType === resultTypes.databaseError) return databaseError;
+  if (msgType === resultTypes.productNotFound) return { type: msgType, message };
+  return { type: null, message };
+};
+
+const searchProduct = async (query) => {
+  const { type, message } = await productsModels.search(query);
+  if (type) return databaseError;
+  return { type, message };
+};
+
 module.exports = {
   listAll,
   findById,
   insertProduct,
+  updateProduct,
+  removeProduct,
+  searchProduct,
 };

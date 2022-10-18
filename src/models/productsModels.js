@@ -24,8 +24,34 @@ const insert = asyncWrapper(async (name) => {
   return { type: null, message: insertId };
 });
 
+const update = asyncWrapper(async (id, name) => {
+  const [{ affectedRows }] = await connection.execute(
+    'UPDATE StoreManager.products SET name = ? WHERE id = ?', [name, id],
+  );
+  if (affectedRows > 0) return { type: null, message: affectedRows };
+  return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
+});
+
+const remove = asyncWrapper(async (id) => {
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?', [id],
+  );
+  if (affectedRows > 0) return { type: null, message: affectedRows };
+  return { type: resultTypes.productNotFound, message: resultMsg.productNotFound };
+});
+
+const search = asyncWrapper(async (query) => {
+  const [product] = await connection.execute(
+    'SELECT * FROM StoreManager.products WHERE name LIKE ?', [`%${query}%`],
+  );
+  return { type: null, message: product };
+});
+
 module.exports = {
   listAll,
   findById,
   insert,
+  update,
+  remove,
+  search,
 };
